@@ -1,0 +1,36 @@
+.about {
+  width: 100%;
+  min-height: 100vh;
+}
+
+.about .container-about {
+  width: 85%;
+  padding: 2rem;
+  line-height: 1.6;
+  background-color: #fff;
+  margin: 1rem auto;
+}
+
+.about .container-about > * {
+  margin: 24px auto;
+}
+
+.about .container-about h1 {
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.about .container-about h2 {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.about .container-about img {
+  width: auto;
+  margin: auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  border-radius: 4px;
+}
+/*# sourceMappingURL=about.css.map */

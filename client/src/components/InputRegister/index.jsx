@@ -1,0 +1,21 @@
+import React from "react";
+
+export default function index(props) {
+  const {type, name, placeholder, id, label, handleChange, value} = props;
+  return (
+    <div className="mb-3 w-100 p-2">
+      <label htmlFor={id} className="form-label p-1 text-capitalize">
+        {label}
+      </label>
+      <input
+        type={type}
+        className="form-control p-1 w-100"
+        id={id}
+        placeholder={placeholder}
+        name={name}
+        onChange={handleChange}
+        value={value}
+      />
+    </div>
+  );
+}

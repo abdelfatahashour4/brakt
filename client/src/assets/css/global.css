@@ -1,0 +1,50 @@
+/*
+    reset all properties css
+*/
+*,
+*::before,
+*::after {
+  padding: 0;
+  margin: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+@font-face {
+  font-family: "Concert One", cursive;
+  src: url("https://fonts.googleapis.com/css2?family=Concert+One");
+  font-display: swap;
+  font-weight: 600;
+}
+
+@font-face {
+  font-family: "Roboto Condensed", sans-serif;
+  src: url("https://fonts.googleapis.com/css2?family=Roboto+Condensed");
+  font-display: swap;
+  font-weight: 400;
+}
+
+body {
+  width: 100%;
+  min-height: 100vh;
+  font-size: 0.85rem;
+  background-color: #eef0f1;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Concert One", cursive;
+}
+
+p,
+span,
+a,
+span,
+strong {
+  font-family: "Roboto Condensed", sans-serif;
+}
+/*# sourceMappingURL=global.css.map */

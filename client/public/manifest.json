@@ -1,0 +1,15 @@
+{
+  "short_name": "Brakt",
+  "name": "Brakt",
+  "icons": [
+    {
+      "src": "favicon.ico",
+      "sizes": "64x64 32x32 24x24 16x16",
+      "type": "image/icon"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#0b0b0b",
+  "background_color": "#eef0f1"
+}
