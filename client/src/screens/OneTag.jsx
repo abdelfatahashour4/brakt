@@ -9,6 +9,11 @@ export default function OneTag() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
   const [page, setPage] = useState(1);
+  console.log(article);
+  console.log(error);
+  console.log(page);
+  console.log(setPage);
+  console.log(loading);
 
   useEffect(() => {
     async function fetchArticle() {
