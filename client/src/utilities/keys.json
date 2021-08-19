@@ -1,3 +1,4 @@
 {
-  "API_URL": "http://localhost:9000"
+  "API_URL": "http://localhost:9000",
+  "real_api": "https://brakt.herokuapp.com"
 }
