@@ -68,7 +68,6 @@ async function getArticles(req, res) {
 async function getArticlesWithTags(req, res) {
   try {
     const {tags, page} = req.query;
-
     const result = await Article.find({
       tags: tags === "All" ? {$gt: ""} : {$in: [tags]},
     })

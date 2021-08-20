@@ -1,11 +1,11 @@
 import React, {useState} from "react";
 import {Link} from "react-router-dom";
-import Tags from "../utilities/tags_types.json";
+import "../assets/css/home.css";
 import Helmet from "../components/Helmet";
 import OneArticle from "../components/OneArticle";
-import useFetch from "../hooks/useFetchArticles";
 import Spinner from "../components/Spinner";
-import "../assets/css/home.css";
+import useFetch from "../hooks/useFetchArticles";
+import Tags from "../utilities/tags_types.json";
 
 export const articlesLinks = ["general", "technology", "healthy", "sports"];
 
@@ -65,11 +65,10 @@ export default function Home() {
         </div>
         <div className="container">
           {/* start main article's */}
-          <div className="flex d-flex justify-content-start main-articles">
-            {loading && <Spinner />}
-            <div className="container-articles p-2">
-              {/* start nav articles */}
+          <div className="main-articles d-flex justify-content-start">
+            <div className="container-articles w-100">
               <div className="container">
+                {/* start nav articles */}
                 <div className="nav-articles d-flex justify-content-start align-items-center">
                   <div className="list-nav">
                     {articlesLinks.map((item, i) => {
@@ -90,10 +89,17 @@ export default function Home() {
                     })}
                   </div>
                 </div>
+                {loading && <Spinner />}
+                {/* wrapper all articles */}
                 <div className="wrapper-articles row d-flex flex-wrap justify-content-evenly align-items-start">
                   {!error &&
-                    apiData.map((article, i) => {
-                      return <OneArticle article={article} key={i} />;
+                    apiData.map(article => {
+                      return (
+                        <OneArticle
+                          article={article}
+                          currentWidth="col-md-5 col-12"
+                        />
+                      );
                     })}
                 </div>
               </div>

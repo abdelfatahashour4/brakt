@@ -1,7 +1,7 @@
 import {useEffect, useState} from "react";
 import {apiAxios} from "../utilities/axios";
 
-export default function useFetch(method, url, category, tag, params, page) {
+export default function useFetch(method, url, category, tag, params) {
   const [loading, setLoading] = useState(false);
   const [apiData, setApiData] = useState([]);
   const [error, setError] = useState(false);
@@ -14,12 +14,10 @@ export default function useFetch(method, url, category, tag, params, page) {
         method: method,
         url: `/v1${url}${`?category=${category || "All"}`}&${`tags=${
           tag || "All"
-        }`}&${`page=${page || 1}`}`,
-        params: params
-          ? {
-              ...params,
-            }
-          : {},
+        }`}`,
+        params: {
+          ...params,
+        },
       })
         .then(({data}) => {
           setLoading(false);
@@ -37,11 +35,9 @@ export default function useFetch(method, url, category, tag, params, page) {
 
     // clean up
     return () => {
-      setLoading(false);
-      setApiData([]);
-      setError(false);
+      return;
     };
-  }, [method, url, category, tag, params, page]);
+  }, [method, url, category, tag, params]);
 
   return {
     loading,

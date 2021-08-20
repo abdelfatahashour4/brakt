@@ -6,13 +6,13 @@
 .hotTags {
   width: 250px;
   min-height: 400px;
-  padding: 1rem;
+  padding: 8px;
   position: fixed;
   top: 50%;
   left: 0;
-  background-color: #fff;
   -webkit-transform: translate(-100%, -50%);
           transform: translate(-100%, -50%);
+  background-color: #fff;
   border-radius: 0 4px 4px 0;
   z-index: 310;
 }
@@ -51,9 +51,9 @@
       -ms-flex-align: center;
           align-items: center;
   border-radius: 0 4px 4px 0;
-  padding: 4px;
-  font-size: 18px;
-  font-weight: 700;
+  padding: 2px;
+  font-size: 16px;
+  font-weight: 600;
   z-index: 222;
 }
 
@@ -94,25 +94,8 @@
   display: none;
 }
 
-.container-articles {
-  width: 100%;
-}
-
-.active-menu-filter {
-  -webkit-transform: translateX(0) !important;
-          transform: translateX(0) !important;
-  -webkit-transition: all 0.75s ease-out;
-  transition: all 0.75s ease-out;
-}
-
 .nav-articles {
-  padding: 4px;
-}
-
-.nav-articles span {
-  text-transform: capitalize;
-  font-size: 16px;
-  font-weight: 700;
+  margin: 8px 0;
 }
 
 .list-nav {
@@ -126,6 +109,7 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  padding: 8px;
 }
 
 .list-nav .btn-nav {
@@ -133,13 +117,8 @@
   outline: 0;
   background-color: transparent;
   font-weight: 600;
-  font-size: 16px;
-  padding: 0.2em;
-}
-
-.nav-articles .btn {
-  font-weight: 600;
   font-size: 14px;
+  padding: 4px;
 }
 
 .active-btn-articles {
@@ -148,55 +127,12 @@
 }
 
 .wrapper-articles {
-  padding: 2rem 0;
+  padding: 16px;
 }
 
 @media (max-width: 576px) {
-  .main-articles {
-    margin-top: 100px;
-  }
-  .container-filter {
-    position: fixed;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    z-index: 2;
-    width: 100%;
-    -webkit-transform: translateX(-100%);
-            transform: translateX(-100%);
-  }
-  .container-filter .list-menu li {
-    text-align: center !important;
-  }
-  .container-articles {
-    width: 100% !important;
-  }
-  .one-article {
-    width: 100%;
-  }
-}
-
-@media (min-width: 576.5px) and (max-width: 768px) {
-  .main-articles {
-    margin-top: 100px;
-  }
-  .container-filter {
-    position: fixed;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    z-index: 2;
-    width: 100%;
-    -webkit-transform: translateX(-100%);
-            transform: translateX(-100%);
-  }
-  .container-filter .list-menu li {
-    text-align: center !important;
-  }
-  .container-articles {
-    width: 100% !important;
+  .nav-articles {
+    padding: 4px 8px !important;
   }
 }
 /*# sourceMappingURL=home.css.map */

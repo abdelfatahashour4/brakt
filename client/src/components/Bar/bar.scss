@@ -100,7 +100,7 @@
     a {
       color: $second-color;
       font-size: 22px;
-      margin-left: 16px;
+      margin-right: 16px;
       &:hover {
         color: $first-color;
       }
@@ -120,6 +120,7 @@
   text-decoration: none;
   text-transform: capitalize;
   font-size: 12px !important;
+  margin-right: 16px;
 }
 
 .profile {

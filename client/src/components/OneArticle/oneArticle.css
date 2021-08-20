@@ -1,9 +1,9 @@
 .one-article {
+  position: relative;
   min-height: 280px;
   max-height: 310px;
   border-radius: 4px;
   margin-bottom: 16px;
-  position: relative;
   overflow: hidden;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -44,16 +44,6 @@
           justify-content: center;
 }
 
-.one-article .wrapper-image .title {
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  left: 0;
-  background-color: #fff;
-  padding: 16px;
-  z-index: 1;
-}
-
 .one-article .container-info-author .image-author {
   width: 40px;
   height: 40px;
@@ -74,8 +64,6 @@
   bottom: 0;
   background-color: #fff;
   z-index: 2;
-  -webkit-transform: translateY(100%);
-          transform: translateY(100%);
 }
 
 .one-article .article-details .img-user {
@@ -116,32 +104,28 @@
   transition: all 0.5s ease-in-out;
 }
 
-.one-article .save-article button {
-  border: 1px solid #ff0000;
-  outline: 0;
-  -ms-flex-item-align: center;
-      -ms-grid-row-align: center;
-      align-self: center;
-  font-size: 18px;
-  padding: 2px;
-  border-radius: 4px;
-  font-weight: 600;
-  background-color: #fff;
-  color: #ff0000;
-}
-
-.one-article:hover .article-details {
-  -webkit-transform: translateY(0);
-          transform: translateY(0);
+.one-article:hover .wrapper-image img {
+  -webkit-transform: scale(1.1);
+          transform: scale(1.1);
   -webkit-transition: all 0.5s ease-out;
   transition: all 0.5s ease-out;
 }
 
-.one-article:hover .wrapper-image img {
-  -webkit-transform: scale(1.1);
-          transform: scale(1.1);
-  -webkit-transition: all 0.3s ease-out;
-  transition: all 0.3s ease-out;
+.btn-save {
+  position: absolute;
+  top: 25%;
+  right: -1px;
+  -webkit-transform: translateY(-25%);
+          transform: translateY(-25%);
+  font-size: 18px;
+  font-weight: 600;
+  padding: 2px;
+  color: #fff;
+  background-color: #ff0000;
+  border: 1px solid #ff0000;
+  border-radius: 4px 0 0 4px;
+  outline: 0;
+  z-index: 3;
 }
 
 .sports {
@@ -158,5 +142,20 @@
 
 .general {
   background-color: #144206;
+}
+
+@media (max-width: 576px) {
+  .one-article .article-details {
+    padding: 8px !important;
+  }
+  .one-article .category {
+    font-size: 12px !important;
+  }
+}
+
+@media (min-width: 576.5px) and (max-width: 768px) {
+  .one-article .category {
+    font-size: 12px !important;
+  }
 }
 /*# sourceMappingURL=oneArticle.css.map */

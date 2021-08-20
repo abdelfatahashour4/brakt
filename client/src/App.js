@@ -1,14 +1,16 @@
 import React, {lazy, Suspense} from "react";
-import {BrowserRouter, Switch, Route} from "react-router-dom";
+import {useSelector} from "react-redux";
+import {BrowserRouter, Route, Switch} from "react-router-dom";
+import {io} from "socket.io-client";
+import Bar from "./components/Bar";
 import Spinner from "./components/Spinner";
 import Toaster from "./components/Toast";
-import Bar from "./components/Bar";
-import SignUp from "./screens/signup";
-import ResetPassword from "./screens/ResetPassword";
+import DetailsArticle from "./screens/DetailsArticle";
 import ForgetPassword from "./screens/ForgetPassword";
 import Login from "./screens/login";
-import {useSelector} from "react-redux";
-import DetailsArticle from "./screens/DetailsArticle";
+import ResetPassword from "./screens/ResetPassword";
+import SignUp from "./screens/signup";
+import {API_URL} from "./utilities/keys.json";
 const Home = lazy(() => import("./screens/Home.jsx"));
 const About = lazy(() => import("./screens/About.jsx"));
 const Faq = lazy(() => import("./screens/Faq.jsx"));
@@ -16,6 +18,10 @@ const Contact = lazy(() => import("./screens/Contact.jsx"));
 const OneTag = lazy(() => import("./screens/OneTag.jsx"));
 const Tags = lazy(() => import("./screens/Tags.jsx"));
 const CreatePost = lazy(() => import("./screens/CreatePost.jsx"));
+
+export const Socket = io(API_URL, {
+  transports: ["websocket", "polling"],
+});
 
 export default function App() {
   const {auth} = useSelector(state => state);
@@ -26,7 +32,7 @@ export default function App() {
         <Bar />
         <Toaster />
         <Switch>
-          <Route path="/tags/:category/:oneTag">
+          <Route path="/tags/:oneTag">
             <Suspense fallback={<Spinner />}>
               <OneTag />
             </Suspense>

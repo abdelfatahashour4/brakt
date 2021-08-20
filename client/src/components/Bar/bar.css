@@ -127,7 +127,7 @@
 .options-bar .links-options a {
   color: #0b0b0b;
   font-size: 22px;
-  margin-left: 16px;
+  margin-right: 16px;
 }
 
 .options-bar .links-options a:hover {
@@ -146,6 +146,7 @@
   text-decoration: none;
   text-transform: capitalize;
   font-size: 12px !important;
+  margin-right: 16px;
 }
 
 .profile {

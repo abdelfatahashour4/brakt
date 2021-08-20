@@ -1,3 +1,8 @@
+.spinner {
+  width: 100%;
+  height: 400px;
+}
+
 /* Spinner 3Balls Scale */
 .sp-3balls,
 .sp-3balls:before,

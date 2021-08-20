@@ -1,11 +1,12 @@
 @import "../../assets/css/variables.scss";
 
+// start articles
 .one-article {
+  position: relative;
   min-height: 280px;
   max-height: 310px;
   border-radius: 4px;
   margin-bottom: 16px;
-  position: relative;
   overflow: hidden;
   display: flex;
   padding: 0;
@@ -33,15 +34,6 @@
       align-items: center;
       justify-content: center;
     }
-    .title {
-      position: absolute;
-      bottom: 0;
-      right: 0;
-      left: 0;
-      background-color: #fff;
-      padding: 16px;
-      z-index: 1;
-    }
   }
   .container-info-author {
     .image-author {
@@ -62,7 +54,6 @@
     bottom: 0;
     background-color: #fff;
     z-index: 2;
-    transform: translateY(100%);
     .img-user {
       width: auto;
       height: 40px;
@@ -94,28 +85,28 @@
         transition: all 0.5s ease-in-out;
       }
     }
-    button {
-      border: 1px solid $first-color;
-      outline: 0;
-      align-self: center;
-      font-size: 18px;
-      padding: 2px;
-      border-radius: 4px;
-      font-weight: 600;
-      background-color: #fff;
-      color: $first-color;
-    }
-  }
-
-  &:hover .article-details {
-    transform: translateY(0);
-    transition: all 0.5s ease-out;
   }
 
   &:hover .wrapper-image img {
     transform: scale(1.1);
-    transition: all 0.3s ease-out;
+    transition: all 0.5s ease-out;
   }
+}
+
+.btn-save {
+  position: absolute;
+  top: 25%;
+  right: -1px;
+  transform: translateY(-25%);
+  font-size: 18px;
+  font-weight: 600;
+  padding: 2px;
+  color: #fff;
+  background-color: $first-color;
+  border: 1px solid $first-color;
+  border-radius: 4px 0 0 4px;
+  outline: 0;
+  z-index: 3;
 }
 
 .sports {
@@ -132,4 +123,23 @@
 
 .general {
   background-color: rgb(20, 66, 6);
+}
+
+@media (max-width: 576px) {
+  .one-article {
+    .article-details {
+      padding: 8px !important;
+    }
+    .category {
+      font-size: 12px !important;
+    }
+  }
+}
+
+@media (min-width: 576.5px) and (max-width: 768px) {
+  .one-article {
+    .category {
+      font-size: 12px !important;
+    }
+  }
 }

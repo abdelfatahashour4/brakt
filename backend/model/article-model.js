@@ -1,6 +1,5 @@
 const {Schema, model} = require("mongoose");
 const {ObjectId} = Schema.Types;
-
 const articleSchema = new Schema(
   {
     author: {
@@ -12,9 +11,21 @@ const articleSchema = new Schema(
     description: String,
     imageArticle: String,
     content: String,
-    like: {type: Object, default: []},
-    unlike: {type: Object, default: []},
-    comments: {type: Object, default: []},
+    like: {
+      _id: String,
+      type: [Object],
+      default: [],
+    },
+    unlike: {
+      _id: String,
+      type: [Object],
+      default: [],
+    },
+    comments: {
+      _id: String,
+      type: [Object],
+      default: [],
+    },
     tags: {type: [String], default: []},
     visible: {
       type: Boolean,

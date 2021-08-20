@@ -1,19 +1,16 @@
 import React, {useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
-import {apiAxios} from "../utilities/axios";
 import Helmet from "../components/Helmet";
+import OneArticle from "../components/OneArticle";
+import Spinner from "../components/Spinner";
+import {apiAxios} from "../utilities/axios";
 
 export default function OneTag() {
-  const {category, oneTag} = useParams();
+  const {oneTag} = useParams();
   const [article, setArticle] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
   const [page, setPage] = useState(1);
-  console.log(article);
-  console.log(error);
-  console.log(page);
-  console.log(setPage);
-  console.log(loading);
 
   useEffect(() => {
     async function fetchArticle() {
@@ -22,15 +19,18 @@ export default function OneTag() {
         .get("/v1/article/tags", {
           params: {
             tags: oneTag,
-            page: 1,
+            page: page,
           },
         })
         .then(({data}) => {
           setLoading(false);
           setArticle(data.message);
+          setError(error);
         })
-        .catch(() => {
+        .catch(error => {
+          console.log("Error ", error);
           setLoading(false);
+          setArticle(false);
           setError(true);
         });
     }
@@ -39,19 +39,52 @@ export default function OneTag() {
 
     return () => {
       setArticle(false);
+      setError(false);
+      setLoading(false);
     };
-  }, [category, oneTag]);
+  }, [oneTag]);
 
   return (
     <>
       <Helmet
-        title={"#" + category.toUpperCase()}
+        title={"#" + oneTag.toUpperCase()}
         description="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi nulla sed odio animi. Magnam mollitia itaque commodi blanditiis iure accusantium rerum laudantium deserunt adipisci. Temporibus aliquid incidunt non hic! Qui."
       />
       <main>
-        <div className="container">
-          <div>hello world</div>
-        </div>
+        {loading && <Spinner />}
+        {error && (
+          <div className="alert alert-danger">something went wrong!</div>
+        )}
+        {!error && article.length > 0 && (
+          <>
+            <h1 className="text-center mt-3 p-1">#{oneTag.toUpperCase()}</h1>
+            <div className="container">
+              <div className="row d-flex justify-content-center align-items-start">
+                {!error &&
+                  article.map(item => {
+                    return (
+                      <React.Fragment key={item._id}>
+                        <OneArticle
+                          article={item}
+                          currentWidth="col-md-8 col-12"
+                        />
+                      </React.Fragment>
+                    );
+                  })}
+              </div>
+            </div>
+          </>
+        )}
+        {!error && article.length === 0 && (
+          <div className="row m-0 p-0">
+            <div
+              class="alert alert-light text-center mt-5 col-md-6 col-12 mx-auto"
+              role="alert"
+            >
+              not available article match with #{oneTag}
+            </div>
+          </div>
+        )}
       </main>
     </>
   );

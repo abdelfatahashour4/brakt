@@ -11,15 +11,15 @@
 }
 
 @font-face {
-  font-family: "Concert One", cursive;
-  src: url("https://fonts.googleapis.com/css2?family=Concert+One");
+  font-family: "Josefin Sans", sans-serif;
+  src: url("https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap");
   font-display: swap;
   font-weight: 600;
 }
 
 @font-face {
-  font-family: "Roboto Condensed", sans-serif;
-  src: url("https://fonts.googleapis.com/css2?family=Roboto+Condensed");
+  font-family: "Open Sans", sans-serif;
+  src: url("https://fonts.googleapis.com/css2?family=Open+Sans:ital@1&display=swap");
   font-display: swap;
   font-weight: 400;
 }
@@ -31,13 +31,18 @@ body {
   background-color: #eef0f1;
 }
 
+main {
+  width: 100%;
+  min-height: 100vh;
+}
+
 h1,
 h2,
 h3,
 h4,
 h5,
 h6 {
-  font-family: "Concert One", cursive;
+  font-family: "Josefin Sans", sans-serif;
 }
 
 p,
@@ -45,6 +50,6 @@ span,
 a,
 span,
 strong {
-  font-family: "Roboto Condensed", sans-serif;
+  font-family: "Open Sans", sans-serif;
 }
 /*# sourceMappingURL=global.css.map */
