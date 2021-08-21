@@ -9,7 +9,9 @@ export default function useFetch(method, url, category, tag, params) {
   useEffect(() => {
     const handleFetch = async () => {
       setLoading(true);
-
+      setApiData([]);
+      setError(true);
+      
       await apiAxios({
         method: method,
         url: `/v1${url}${`?category=${category || "All"}`}&${`tags=${
