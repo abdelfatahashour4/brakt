@@ -1,8 +1,6 @@
-// @ts-nocheck
 import axios from "axios";
-import {API_URL} from "./keys.json";
 const apiAxios = axios.create({
-  baseURL: API_URL,
+  baseURL: process.env.REACT_APP_API,
   withCredentials: true,
 });
 

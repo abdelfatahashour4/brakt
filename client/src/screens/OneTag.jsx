@@ -10,7 +10,7 @@ export default function OneTag() {
   const [article, setArticle] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
-  const [page, setPage] = useState(1);
+  const [page] = useState(1);
 
   useEffect(() => {
     async function fetchArticle() {
@@ -42,7 +42,7 @@ export default function OneTag() {
       setError(false);
       setLoading(false);
     };
-  }, [oneTag]);
+  }, [oneTag, error, page]);
 
   return (
     <>

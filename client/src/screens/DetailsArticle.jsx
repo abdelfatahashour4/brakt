@@ -11,7 +11,6 @@ import Helmet from "../components/Helmet";
 import Spinner from "../components/Spinner";
 import {notify} from "../components/Toast";
 import {apiAxios} from "../utilities/axios";
-import {API_URL} from "../utilities/keys.json";
 import {
   ADD_COMMENT,
   ADD_LIKE_ARTICLE,
@@ -160,7 +159,11 @@ export default function DetailsArticle() {
             <div className="container-article">
               <div className="box-image">
                 <img
-                  src={API_URL + "/v1/image/" + article.imageArticle}
+                  src={
+                    process.env.REACT_APP_API +
+                    "/v1/image/" +
+                    article.imageArticle
+                  }
                   alt={article.title}
                   loading="lazy"
                 />

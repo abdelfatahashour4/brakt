@@ -4,7 +4,6 @@ import {AiOutlineHeart} from "react-icons/ai";
 import {BiLinkAlt} from "react-icons/bi";
 import {Link} from "react-router-dom";
 import user from "../../assets/images/user.png";
-import {API_URL} from "../../utilities/keys.json";
 import "./oneArticle.css";
 
 export default function index({article, currentWidth}) {
@@ -15,7 +14,7 @@ export default function index({article, currentWidth}) {
       </button>
       <div className="wrapper-image">
         <img
-          src={API_URL + "/v1/image/" + article.imageArticle}
+          src={process.env.REACT_APP_API + "/v1/image/" + article.imageArticle}
           alt={article.title}
           loading="lazy"
         />

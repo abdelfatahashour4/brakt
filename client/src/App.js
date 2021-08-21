@@ -10,7 +10,6 @@ import ForgetPassword from "./screens/ForgetPassword";
 import Login from "./screens/login";
 import ResetPassword from "./screens/ResetPassword";
 import SignUp from "./screens/signup";
-import {API_URL} from "./utilities/keys.json";
 const Home = lazy(() => import("./screens/Home.jsx"));
 const About = lazy(() => import("./screens/About.jsx"));
 const Faq = lazy(() => import("./screens/Faq.jsx"));
@@ -19,7 +18,7 @@ const OneTag = lazy(() => import("./screens/OneTag.jsx"));
 const Tags = lazy(() => import("./screens/Tags.jsx"));
 const CreatePost = lazy(() => import("./screens/CreatePost.jsx"));
 
-export const Socket = io(API_URL, {
+export const Socket = io(process.env.REACT_APP_API, {
   transports: ["websocket", "polling"],
 });
 
