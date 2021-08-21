@@ -3,6 +3,7 @@ const {hash, compare} = require("bcrypt");
 const {sign, verify} = require("jsonwebtoken");
 const {serialize} = require("cookie");
 const {validateRegister} = require("../utilities/validateRegister");
+
 async function register(req, res) {
   try {
     const {firstName, lastName, username, email, password} = req.body;
@@ -66,6 +67,7 @@ async function login(req, res) {
       serialize(
         "user_info",
         JSON.stringify({
+          _id: isAuthor._id,
           username: isAuthor.username,
           email: isAuthor.firstName,
         }),

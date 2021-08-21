@@ -1,24 +1,34 @@
+import cookie from "js-cookie";
 import React, {useEffect} from "react";
-import {Link} from "react-router-dom";
+import {BiLogInCircle} from "react-icons/bi";
+import {CgProfile} from "react-icons/cg";
 import {FiSearch} from "react-icons/fi";
 import {GrNotification} from "react-icons/gr";
-import {RiChat1Line} from "react-icons/ri";
-import {CgProfile} from "react-icons/cg";
 import {HiMenuAlt2} from "react-icons/hi";
-import {BiLogInCircle} from "react-icons/bi";
+import {RiChat1Line} from "react-icons/ri";
 import {useDispatch, useSelector} from "react-redux";
+import {Link} from "react-router-dom";
+import {v4} from "uuid";
+import LOGO from "../../assets/images/logo.png";
+import {notify} from "../../components/Toast";
 import {loginAction, logoutAction} from "../../redux/actions/authActions";
 import {IS_LOGIN, IS_LOGOUT} from "../../redux/types";
 import {apiAxios} from "../../utilities/axios";
-import {notify} from "../../components/Toast";
-import LOGO from "../../assets/images/logo.png";
-import cookie from "js-cookie";
+import {GenerateAnonymous} from "../../utilities/generateAnonymous";
 import "./bar.css";
 
 export default function Index() {
   const {auth} = useSelector(state => state);
   const dispatch = useDispatch();
   const isCookie = cookie.get("user_info");
+  const anonymous = localStorage.getItem("anonymous");
+
+  useEffect(() => {
+    if (!anonymous && !auth.isLogin) {
+      const anonymous = new GenerateAnonymous("anonymous", v4());
+      localStorage.setItem("anonymous", JSON.stringify(anonymous));
+    }
+  }, [anonymous, auth.isLogin]);
 
   window.addEventListener("scroll", e => {
     let elem = document.getElementById("full-bar");

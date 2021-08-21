@@ -3,15 +3,15 @@ const {v4} = require("uuid");
 
 async function addComment(data) {
   try {
-    const {articleId, content, user} = data;
-    console.log("data ", data);
+    const {articleId, content, username, userId} = data;
     await Article.findByIdAndUpdate(
       articleId,
       {
         $addToSet: {
           comments: {
             _id: v4(),
-            user,
+            username,
+            userId,
             content,
           },
         },
@@ -19,7 +19,6 @@ async function addComment(data) {
       {new: true},
       error => {
         if (error) throw new Error(error);
-        console.log("added comment");
       }
     );
   } catch (error) {
@@ -43,7 +42,100 @@ async function deleteComment(data) {
       {new: true},
       error => {
         if (error) throw new Error(error);
-        console.log("deleted comment");
+      }
+    );
+  } catch (error) {
+    console.log(error.message);
+  }
+}
+
+async function addLike(data) {
+  try {
+    const {articleId, userId, username} = data;
+
+    await Article.findByIdAndUpdate(
+      articleId,
+      {
+        $addToSet: {
+          like: {
+            _id: v4(),
+            username,
+            userId,
+          },
+        },
+      },
+      {new: true},
+      error => {
+        if (error) throw new Error(error);
+      }
+    );
+  } catch (error) {
+    console.log(error.message);
+  }
+}
+
+async function addUnLike(data) {
+  try {
+    const {articleId, userId, username} = data;
+
+    await Article.findByIdAndUpdate(
+      articleId,
+      {
+        $addToSet: {
+          unlike: {
+            _id: v4(),
+            username,
+            userId,
+          },
+        },
+      },
+      {new: true},
+      error => {
+        if (error) throw new Error(error);
+      }
+    );
+  } catch (error) {
+    console.log(error.message);
+  }
+}
+
+async function cancelLike(data) {
+  try {
+    const {articleId, userId} = data;
+    await Article.findByIdAndUpdate(
+      articleId,
+      {
+        $pull: {
+          like: {
+            userId,
+          },
+        },
+      },
+      {new: true},
+      error => {
+        if (error) throw new Error(error);
+      }
+    );
+  } catch (error) {
+    console.log(error.message);
+  }
+}
+
+async function cancelUnlike(data) {
+  try {
+    const {articleId, userId} = data;
+    await Article.findByIdAndUpdate(
+      articleId,
+      {
+        $pull: {
+          unlike: {
+            userId,
+          },
+        },
+      },
+      {new: true},
+      error => {
+        if (error) throw new Error(error);
       }
     );
   } catch (error) {
@@ -54,4 +146,8 @@ async function deleteComment(data) {
 module.exports = {
   addComment,
   deleteComment,
+  addLike,
+  addUnLike,
+  cancelLike,
+  cancelUnlike,
 };

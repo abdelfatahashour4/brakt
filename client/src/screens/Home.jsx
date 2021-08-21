@@ -55,7 +55,7 @@ export default function Home() {
                 return (
                   i <= 3 && (
                     <li key={i}>
-                      <Link to="/"># {tag}</Link>
+                      <Link to={"/tags/" + tag}># {tag}</Link>
                     </li>
                   )
                 );
@@ -98,6 +98,7 @@ export default function Home() {
                         <OneArticle
                           article={article}
                           currentWidth="col-md-5 col-12"
+                          key={article._id}
                         />
                       );
                     })}

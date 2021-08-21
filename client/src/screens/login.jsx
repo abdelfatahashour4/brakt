@@ -1,15 +1,14 @@
-import React, {useState} from "react";
-import InputRegister from "../components/InputRegister/index";
-import Helmet from "../components/Helmet";
-import {apiAxios} from "../utilities/axios";
-import {notify} from "../components/Toast";
-import {Link} from "react-router-dom";
-import {useDispatch} from "react-redux";
-import {IS_LOGIN} from "../redux/types";
-import {loginAction} from "../redux/actions/authActions";
 import cookie from "js-cookie";
-import {useHistory} from "react-router-dom";
+import React, {useState} from "react";
+import {useDispatch} from "react-redux";
+import {Link, useHistory} from "react-router-dom";
 import "../assets/css/register.css";
+import Helmet from "../components/Helmet";
+import InputRegister from "../components/InputRegister/index";
+import {notify} from "../components/Toast";
+import {loginAction} from "../redux/actions/authActions";
+import {IS_LOGIN} from "../redux/types";
+import {apiAxios} from "../utilities/axios";
 
 export default function Login() {
   const dispatch = useDispatch();
@@ -33,6 +32,7 @@ export default function Login() {
         notify("success", data.message);
         const isCookie = cookie.get("user_info");
         dispatch(loginAction(IS_LOGIN, JSON.parse(isCookie)));
+        localStorage.removeItem("anonymous");
         route.goBack();
       })
       .catch(error => {

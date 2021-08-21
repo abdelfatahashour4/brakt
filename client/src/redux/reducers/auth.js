@@ -2,6 +2,7 @@ const {IS_LOGIN, IS_LOGOUT} = require("../types");
 
 const initUser = {
   isLogin: false,
+  _id: "",
   username: "",
   email: "",
 };
@@ -12,6 +13,7 @@ function authReducer(state = initUser, {type, payload}) {
       return (state = {
         ...state,
         isLogin: true,
+        _id: payload._id,
         username: payload.username,
         email: payload.email,
       });
@@ -19,6 +21,7 @@ function authReducer(state = initUser, {type, payload}) {
       return (state = {
         ...state,
         isLogin: false,
+        _id: "",
         username: "",
         email: "",
       });
