@@ -20,6 +20,7 @@ const CreatePost = lazy(() => import("./screens/CreatePost.jsx"));
 
 export const Socket = io(process.env.REACT_APP_API, {
   transports: ["websocket", "polling"],
+  secure: process.env.REACT_APP_MODE === "production",
 });
 
 export default function App() {
