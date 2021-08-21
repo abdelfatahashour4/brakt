@@ -19,7 +19,7 @@ const Tags = lazy(() => import("./screens/Tags.jsx"));
 const CreatePost = lazy(() => import("./screens/CreatePost.jsx"));
 
 export const Socket = io(process.env.REACT_APP_API, {
-  transports: ["websocket", "polling"],
+  transports: ["websocket"],
   secure: process.env.REACT_APP_MODE === "production",
 });
 
