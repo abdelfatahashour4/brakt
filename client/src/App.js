@@ -10,6 +10,7 @@ import ForgetPassword from "./screens/ForgetPassword";
 import Login from "./screens/login";
 import ResetPassword from "./screens/ResetPassword";
 import SignUp from "./screens/signup";
+import Wishlist from "./screens/Wishlist";
 const Home = lazy(() => import("./screens/Home.jsx"));
 const About = lazy(() => import("./screens/About.jsx"));
 const Faq = lazy(() => import("./screens/Faq.jsx"));
@@ -80,6 +81,11 @@ export default function App() {
           <Route path="/FAQ">
             <Suspense fallback={<Spinner />}>
               <Faq />
+            </Suspense>
+          </Route>
+          <Route path="/wishlist">
+            <Suspense fallback={<Spinner />}>
+              <Wishlist />
             </Suspense>
           </Route>
           <Route path="/create-post">

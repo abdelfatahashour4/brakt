@@ -1,9 +1,9 @@
 import React from "react";
-import Helmet from "../components/Helmet";
 import {Link} from "react-router-dom";
+import "../assets/css/about.css";
 import Leader from "../assets/images/Leadership.jpg";
 import team from "../assets/images/Team.jpg";
-import "../assets/css/about.css";
+import Helmet from "../components/Helmet";
 
 export default function About() {
   return (
@@ -32,22 +32,10 @@ export default function About() {
             </p>
 
             <h2>Leadership</h2>
-            <img
-              src={Leader}
-              alt="Leadership"
-              loading="Leadership"
-              width="450"
-              height="350"
-            />
+            <img src={Leader} alt="Leadership" loading="lazy" />
 
             <h2>Team</h2>
-            <img
-              src={team}
-              alt="Team"
-              loading="lazy"
-              width="450"
-              height="350"
-            />
+            <img src={team} alt="Team" loading="lazy" />
 
             <p>
               Our team is distributed around the world. We have no office, but

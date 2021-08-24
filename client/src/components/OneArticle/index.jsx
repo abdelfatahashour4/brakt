@@ -2,14 +2,21 @@ import moment from "moment";
 import React from "react";
 import {AiOutlineHeart} from "react-icons/ai";
 import {BiLinkAlt} from "react-icons/bi";
+import {useDispatch} from "react-redux";
 import {Link} from "react-router-dom";
 import user from "../../assets/images/user.png";
+import {ToggleWishlist} from "../../utilities/useAddWishlist";
 import "./oneArticle.css";
 
-export default function index({article, currentWidth}) {
+export default function Index({article, currentWidth}) {
+  const dispatch = useDispatch();
   return (
     <div className={"one-article p-0 " + currentWidth} key={article._id}>
-      <button className="btn-save" aria-label="saved to favorite">
+      <button
+        className="btn-save"
+        aria-label="saved to favorite"
+        onClick={() => ToggleWishlist(article, dispatch)}
+      >
         <AiOutlineHeart />
       </button>
       <div className="wrapper-image">

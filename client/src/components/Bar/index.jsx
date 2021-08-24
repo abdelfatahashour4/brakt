@@ -1,5 +1,6 @@
 import cookie from "js-cookie";
 import React, {useEffect} from "react";
+import {AiTwotoneHeart} from "react-icons/ai";
 import {BiLogInCircle} from "react-icons/bi";
 import {CgProfile} from "react-icons/cg";
 import {FiSearch} from "react-icons/fi";
@@ -22,6 +23,7 @@ export default function Index() {
   const dispatch = useDispatch();
   const isCookie = cookie.get("user_info");
   const anonymous = localStorage.getItem("anonymous");
+  const wishlist = localStorage.getItem("wishlist_articles");
 
   useEffect(() => {
     if (!anonymous && !auth.isLogin) {
@@ -29,6 +31,12 @@ export default function Index() {
       localStorage.setItem("anonymous", JSON.stringify(anonymous));
     }
   }, [anonymous, auth.isLogin]);
+
+  useEffect(() => {
+    if (!wishlist) {
+      localStorage.setItem("wishlist_articles", JSON.stringify([]));
+    }
+  }, [wishlist, dispatch]);
 
   window.addEventListener("scroll", e => {
     let elem = document.getElementById("full-bar");
@@ -162,6 +170,9 @@ export default function Index() {
               create post
             </Link>
             <div className="d-flex links-options">
+              <Link to="/wishlist" aria-label="nav to wishlist page">
+                <AiTwotoneHeart />
+              </Link>
               <Link to="/chat" aria-label="nav to chat page">
                 <RiChat1Line />
               </Link>

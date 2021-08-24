@@ -26,11 +26,9 @@
 }
 
 .about .container-about img {
-  width: auto;
-  margin: auto;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
+  margin: 0 auto;
+  max-width: 100%;
+  height: auto;
   border-radius: 4px;
 }
 /*# sourceMappingURL=about.css.map */
