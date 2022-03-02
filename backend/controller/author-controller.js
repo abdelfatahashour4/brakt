@@ -1,13 +1,13 @@
 const Author = require("../model/author-model");
-const {hash, compare} = require("bcrypt");
-const {sign, verify} = require("jsonwebtoken");
-const {serialize} = require("cookie");
-const {validateRegister} = require("../utilities/validateRegister");
+const { hash, compare } = require("bcrypt");
+const { sign, verify } = require("jsonwebtoken");
+const { serialize } = require("cookie");
+const { validateRegister } = require("../utilities/validateRegister");
 
 async function register(req, res) {
   try {
-    const {firstName, lastName, username, email, password} = req.body;
-    const {error} = validateRegister(req.body);
+    const { firstName, lastName, username, email, password } = req.body;
+    const { error } = validateRegister(req.body);
 
     if (error) {
       return res.status(400).json({
@@ -15,7 +15,7 @@ async function register(req, res) {
       });
     }
 
-    const isUser = await Author.findOne({email});
+    const isUser = await Author.findOne({ email });
 
     if (isUser) {
       return res.status(400).json({
@@ -34,7 +34,7 @@ async function register(req, res) {
       password: hashedPassword,
     });
 
-    await newAuthor.save(error => {
+    await newAuthor.save((error) => {
       if (error) throw new Error(error);
     });
 
@@ -50,18 +50,20 @@ async function register(req, res) {
 
 async function login(req, res) {
   try {
-    const {email, password} = req.body;
+    const { email, password } = req.body;
     // there validation
-    const isAuthor = await Author.findOne({email});
-
+    const isAuthor = await Author.findOne({ email });
+    if (!isAuthor) {
+      return res.status(400).json({ message: "email or password incorrect" });
+    }
     const comparedPassword = await compare(password, isAuthor.password);
 
     if (!comparedPassword) {
-      return res.status(400).json({message: "email or password incorrect"});
+      return res.status(400).json({ message: "email or password incorrect" });
     }
 
     // generate token
-    const user_token = generateToken({_id: isAuthor._id});
+    const user_token = generateToken({ _id: isAuthor._id });
 
     res.cookie(
       serialize(
@@ -90,7 +92,7 @@ async function login(req, res) {
         path: "/",
       })
     );
-    return res.status(200).json({message: "login successful"});
+    return res.status(200).json({ message: "login successful" });
   } catch (error) {
     return res.status(500).json({
       message: error.message,
@@ -102,7 +104,7 @@ async function logout(req, res) {
   try {
     res.clearCookie("user_info");
     res.clearCookie("user_token");
-    res.status(200).json({message: "logout successful"});
+    res.status(200).json({ message: "logout successful" });
   } catch (error) {
     return res.status(500).json({
       message: error.message,
@@ -113,15 +115,16 @@ async function logout(req, res) {
 async function forgetPassword(req, res) {
   try {
     await Author.findOne(
-      {email: req.body.email},
+      { email: req.body.email },
       null,
-      {new: true},
+      { new: true },
       (error, result) => {
         if (error) throw new Error(error);
-        if (!result) return res.status(404).json({message: "email not found"});
+        if (!result)
+          return res.status(400).json({ message: "email not found" });
 
         if (result) {
-          const token = tokenResetPassword({_id: result._id});
+          const token = tokenResetPassword({ _id: result._id });
           res.cookie(
             serialize("reset_p", token, {
               maxAge: 60 * 15, // 10 min
@@ -129,7 +132,7 @@ async function forgetPassword(req, res) {
           );
           return res
             .status(200)
-            .json({message: "email found , enter new password "});
+            .json({ message: "email found , enter new password " });
         }
       }
     );
@@ -145,10 +148,10 @@ async function newPassword(req, res) {
     if (req.cookies.reset_p) {
       const newHashedPassword = await hash(req.body.newPassword, 10);
       await Author.findOneAndUpdate(
-        {email: req.cookies.reset_p._id},
-        {password: newHashedPassword},
-        {new: true},
-        error => {
+        { email: req.cookies.reset_p._id },
+        { password: newHashedPassword },
+        { new: true },
+        (error) => {
           if (error) throw new Error(error);
           res.clearCookie("reset_p");
           return res.status(200).json({
@@ -170,13 +173,13 @@ async function newPassword(req, res) {
 
 async function isAuth(req, res, next) {
   try {
-    const {user_token} = req.cookies;
+    const { user_token } = req.cookies;
     if (!user_token) {
-      return res.status(403).json({message: "access denied"});
+      return res.status(403).json({ message: "access denied" });
     }
     const verified = await verify(user_token, process.env.ACCESS_TOKEN);
     if (!verified) {
-      return res.status(400).json({message: "you are not authorized"});
+      return res.status(401).json({ message: "you are not authorized" });
     }
     req.user = verified;
     next();
@@ -195,4 +198,11 @@ function tokenResetPassword(data) {
   return sign(data, process.env.ACCESS_TOKEN);
 }
 
-module.exports = {register, login, logout, isAuth, forgetPassword, newPassword};
+module.exports = {
+  register,
+  login,
+  logout,
+  isAuth,
+  forgetPassword,
+  newPassword,
+};
