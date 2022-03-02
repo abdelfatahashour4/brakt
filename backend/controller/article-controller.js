@@ -85,6 +85,10 @@ async function getArticlesWithTags(req, res) {
       .skip(+page === 1 ? 0 : 8 * +page)
       .limit(+page * 6);
 
+    if (!result) {
+      return res.status(404).json({ message: "Articles not found!" });
+    }
+
     return res.status(200).json({ message: result });
   } catch (error) {
     return res.status(500).json({ message: error.message });
