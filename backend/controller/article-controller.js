@@ -66,7 +66,7 @@ async function getArticles(req, res) {
       .limit(+page * 8);
     return res.status(200).json({ message: result });
   } catch (error) {
-    return res.status(500).json({ message: error.message });
+    return res.status(500).json({ message: "something went wrong!" });
   }
 }
 
@@ -91,7 +91,7 @@ async function getArticlesWithTags(req, res) {
 
     return res.status(200).json({ message: result });
   } catch (error) {
-    return res.status(500).json({ message: error.message });
+    return res.status(500).json({ message: "something went wrong!" });
   }
 }
 

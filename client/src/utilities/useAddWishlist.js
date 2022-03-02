@@ -1,6 +1,6 @@
-import {notify} from "../components/Toast";
-import {wishlistAction} from "../redux/actions/wishlistAction";
-import {FETCH_WISHLIST} from "../redux/types";
+import { notify } from "../components/Toast";
+import { wishlistAction } from "../redux/actions/wishlistAction";
+import { FETCH_WISHLIST } from "../redux/types";
 
 export function ToggleWishlist(initState, dispatch) {
   const getWishlist = localStorage.getItem("wishlist_articles");
@@ -14,9 +14,9 @@ export function ToggleWishlist(initState, dispatch) {
     // here toggle wishlist items
     const arr = JSON.parse(getWishlist);
 
-    if (arr.filter(item => item._id === initState._id).length > 0) {
+    if (arr.filter((item) => item._id === initState._id).length) {
       // already in wishlist
-      const newWishlist = arr.filter(item => item._id !== initState._id);
+      const newWishlist = arr.filter((item) => item._id !== initState._id);
       localStorage.setItem("wishlist_articles", JSON.stringify(newWishlist));
       dispatch(wishlistAction(FETCH_WISHLIST, newWishlist));
       notify("success", "🦄 removed article");

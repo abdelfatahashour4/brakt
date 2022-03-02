@@ -1,7 +1,7 @@
-import React, {lazy, Suspense} from "react";
-import {useSelector} from "react-redux";
-import {BrowserRouter, Route, Switch} from "react-router-dom";
-import {io} from "socket.io-client";
+import { lazy, Suspense } from "react";
+import { useSelector } from "react-redux";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { io } from "socket.io-client";
 import Bar from "./components/Bar";
 import Spinner from "./components/Spinner";
 import Toaster from "./components/Toast";
@@ -25,7 +25,7 @@ export const Socket = io(process.env.REACT_APP_API, {
 });
 
 export default function App() {
-  const {auth} = useSelector(state => state);
+  const { auth } = useSelector((state) => state);
 
   return (
     <div className="App">
@@ -33,6 +33,16 @@ export default function App() {
         <Bar />
         <Toaster />
         <Switch>
+          <Route path="/chat">
+            <Suspense fallback={<Spinner />}>
+              <div>coming soon...</div>
+            </Suspense>
+          </Route>
+          <Route path="/notification">
+            <Suspense fallback={<Spinner />}>
+              <div>coming soon...</div>
+            </Suspense>
+          </Route>
           <Route path="/tags/:oneTag">
             <Suspense fallback={<Spinner />}>
               <OneTag />

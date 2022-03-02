@@ -42,9 +42,7 @@ async function register(req, res) {
       message: "register successful",
     });
   } catch (error) {
-    return res.status(500).json({
-      message: error.message,
-    });
+    return res.status(500).json({ message: "something went wrong!" });
   }
 }
 
@@ -94,9 +92,7 @@ async function login(req, res) {
     );
     return res.status(200).json({ message: "login successful" });
   } catch (error) {
-    return res.status(500).json({
-      message: error.message,
-    });
+    return res.status(500).json({ message: "something went wrong!" });
   }
 }
 
@@ -106,9 +102,7 @@ async function logout(req, res) {
     res.clearCookie("user_token");
     res.status(200).json({ message: "logout successful" });
   } catch (error) {
-    return res.status(500).json({
-      message: error.message,
-    });
+    return res.status(500).json({ message: "something went wrong!" });
   }
 }
 
@@ -137,9 +131,7 @@ async function forgetPassword(req, res) {
       }
     );
   } catch (error) {
-    return res.status(500).json({
-      message: error.message,
-    });
+    return res.status(500).json({ message: "something went wrong!" });
   }
 }
 
@@ -165,9 +157,7 @@ async function newPassword(req, res) {
       });
     }
   } catch (error) {
-    return res.status(500).json({
-      message: error.message,
-    });
+    return res.status(500).json({ message: "something went wrong!" });
   }
 }
 
@@ -184,9 +174,7 @@ async function isAuth(req, res, next) {
     req.user = verified;
     next();
   } catch (error) {
-    return res.status(500).json({
-      message: error.message,
-    });
+    return res.status(500).json({ message: "something went wrong!" });
   }
 }
 
