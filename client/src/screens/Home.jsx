@@ -1,5 +1,5 @@
-import React, {useState} from "react";
-import {Link} from "react-router-dom";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import "../assets/css/home.css";
 import Helmet from "../components/Helmet";
 import OneArticle from "../components/OneArticle";
@@ -15,7 +15,7 @@ export default function Home() {
     page: 1,
   });
 
-  const {loading, apiData, error} = useFetch(
+  const { loading, apiData, error } = useFetch(
     "GET",
     "/article",
     allArticles.currentFilter,
@@ -28,7 +28,7 @@ export default function Home() {
     elem.classList.toggle("toggleHotTags");
   };
 
-  const handleFilter = category => {
+  const handleFilter = (category) => {
     setAllArticles({
       ...allArticles,
       currentFilter: category,
@@ -50,7 +50,7 @@ export default function Home() {
             x
           </button>
           <ul className="list-unstyled text-center">
-            {Tags.map(collect => {
+            {Tags.map((collect) => {
               return collect.allTags.map((tag, i) => {
                 return (
                   i <= 3 && (
@@ -63,46 +63,44 @@ export default function Home() {
             })}
           </ul>
         </div>
-        <div className="container">
-          {/* start main article's */}
-          <div className="main-articles d-flex justify-content-start">
-            <div className="container-articles w-100">
-              <div className="container">
-                {/* start nav articles */}
-                <div className="nav-articles d-flex justify-content-start align-items-center">
-                  <div className="list-nav">
-                    {articlesLinks.map((item, i) => {
-                      return (
-                        <button
-                          className={
-                            allArticles.currentFilter === item
-                              ? "active-btn-articles btn-nav mx-2 text-uppercase"
-                              : "btn-nav mx-2 text-uppercase"
-                          }
-                          onClick={() => handleFilter(item)}
-                          key={i}
-                          aria-label={"nav " + item}
-                        >
-                          {item}
-                        </button>
-                      );
-                    })}
-                  </div>
-                </div>
-                {loading && <Spinner />}
-                {/* wrapper all articles */}
-                <div className="wrapper-articles row d-flex flex-wrap justify-content-evenly align-items-start">
-                  {!error &&
-                    apiData.map(article => {
-                      return (
-                        <OneArticle
-                          article={article}
-                          currentWidth="col-md-5 col-12"
-                          key={article._id}
-                        />
-                      );
-                    })}
-                </div>
+        {/* start main article's */}
+        <div className="main-articles d-flex justify-content-start">
+          <div className="container-articles w-100">
+            {/* start nav articles */}
+            <div className="nav-articles d-flex justify-content-start align-items-center">
+              <div className="list-nav">
+                {articlesLinks.map((item, i) => {
+                  return (
+                    <button
+                      className={
+                        allArticles.currentFilter === item
+                          ? "active-btn-articles btn-nav mx-2 text-uppercase"
+                          : "btn-nav mx-2 text-uppercase"
+                      }
+                      onClick={() => handleFilter(item)}
+                      key={i}
+                      aria-label={"nav " + item}
+                    >
+                      {item}
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+            {loading && <Spinner />}
+            {/* wrapper all articles */}
+            <div className="container">
+              <div className="wrapper-articles row d-flex flex-wrap justify-content-evenly align-items-start">
+                {!error &&
+                  apiData.map((article) => {
+                    return (
+                      <OneArticle
+                        article={article}
+                        currentWidth="col-md-5 col-12"
+                        key={article._id}
+                      />
+                    );
+                  })}
               </div>
             </div>
           </div>

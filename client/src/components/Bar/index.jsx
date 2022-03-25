@@ -1,25 +1,23 @@
 import cookie from "js-cookie";
-import React, {useEffect} from "react";
-import {AiTwotoneHeart} from "react-icons/ai";
-import {BiLogInCircle} from "react-icons/bi";
-import {CgProfile} from "react-icons/cg";
-import {FiSearch} from "react-icons/fi";
-import {GrNotification} from "react-icons/gr";
-import {HiMenuAlt2} from "react-icons/hi";
-import {RiChat1Line} from "react-icons/ri";
-import {useDispatch, useSelector} from "react-redux";
-import {Link} from "react-router-dom";
-import {v4} from "uuid";
+import React, { useEffect } from "react";
+import { AiTwotoneHeart } from "react-icons/ai";
+import { BiLogInCircle } from "react-icons/bi";
+import { CgProfile } from "react-icons/cg";
+import { FiSearch } from "react-icons/fi";
+import { HiMenuAlt2 } from "react-icons/hi";
+import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import { v4 } from "uuid";
 import LOGO from "../../assets/images/logo.png";
-import {notify} from "../../components/Toast";
-import {loginAction, logoutAction} from "../../redux/actions/authActions";
-import {IS_LOGIN, IS_LOGOUT} from "../../redux/types";
-import {apiAxios} from "../../utilities/axios";
-import {GenerateAnonymous} from "../../utilities/generateAnonymous";
+import { notify } from "../../components/Toast";
+import { loginAction, logoutAction } from "../../redux/actions/authActions";
+import { IS_LOGIN, IS_LOGOUT } from "../../redux/types";
+import { apiAxios } from "../../utilities/axios";
+import { GenerateAnonymous } from "../../utilities/generateAnonymous";
 import "./bar.css";
 
 export default function Index() {
-  const {auth} = useSelector(state => state);
+  const { auth } = useSelector((state) => state);
   const dispatch = useDispatch();
   const isCookie = cookie.get("user_info");
   const anonymous = localStorage.getItem("anonymous");
@@ -38,7 +36,7 @@ export default function Index() {
     }
   }, [wishlist, dispatch]);
 
-  window.addEventListener("scroll", e => {
+  window.addEventListener("scroll", (e) => {
     let elem = document.getElementById("full-bar");
     let scrollVal = Math.floor(window.pageYOffset);
 
@@ -59,11 +57,11 @@ export default function Index() {
   const handleSubmit = async () => {
     await apiAxios
       .get("/v1/author/logout")
-      .then(({data}) => {
+      .then(({ data }) => {
         notify("success", data.message);
         dispatch(logoutAction(IS_LOGOUT));
       })
-      .catch(error => {
+      .catch((error) => {
         if (error.response) {
           notify("error", error.response.data.message);
         } else if (error.request) {
@@ -173,13 +171,6 @@ export default function Index() {
               <Link to="/wishlist" aria-label="nav to wishlist page">
                 <AiTwotoneHeart />
               </Link>
-              <Link to="/chat" aria-label="nav to chat page">
-                <RiChat1Line />
-              </Link>
-              <Link to="/notification" aria-label="nav to notification page">
-                <GrNotification />
-              </Link>
-
               {auth.isLogin && (
                 <>
                   <div className="profile" aria-label="">
@@ -223,7 +214,6 @@ export default function Index() {
                   </div>
                 </>
               )}
-
               {!auth.isLogin && (
                 <Link to="/login" aria-label="nav to notification page">
                   <BiLogInCircle />

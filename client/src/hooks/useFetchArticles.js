@@ -1,5 +1,10 @@
-import {useEffect, useState} from "react";
-import {apiAxios} from "../utilities/axios";
+import { useEffect, useState } from "react";
+import { apiAxios } from "../utilities/axios";
+console.log(
+  process.env.NODE_ENV !== "production"
+    ? process.env.REACT_APP_API_URL_DEV
+    : process.env.REACT_APP_API_URL_PROD
+);
 
 export default function useFetch(method, url, category, tag, params) {
   const [loading, setLoading] = useState(false);
@@ -11,7 +16,7 @@ export default function useFetch(method, url, category, tag, params) {
       setLoading(true);
       setApiData([]);
       setError(true);
-      
+
       await apiAxios({
         method: method,
         url: `/v1${url}${`?category=${category || "All"}`}&${`tags=${
@@ -21,12 +26,12 @@ export default function useFetch(method, url, category, tag, params) {
           ...params,
         },
       })
-        .then(({data}) => {
+        .then(({ data }) => {
           setLoading(false);
           setApiData(data.message);
           setError(false);
         })
-        .catch(error => {
+        .catch((error) => {
           setLoading(false);
           setApiData([]);
           setError(true);

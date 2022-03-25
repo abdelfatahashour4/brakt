@@ -1,16 +1,16 @@
 import moment from "moment";
-import React, {useEffect, useState} from "react";
-import {AiFillDelete, AiFillDislike, AiFillLike} from "react-icons/ai";
-import {useSelector} from "react-redux";
-import {useParams} from "react-router-dom";
-import {v4} from "uuid";
-import {Socket} from "../App";
+import React, { useEffect, useState } from "react";
+import { AiFillDelete, AiFillDislike, AiFillLike } from "react-icons/ai";
+import { useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
+import { v4 } from "uuid";
+import { Socket } from "../App";
 import "../assets/css/DetailsArticle.css";
 import user from "../assets/images/user.png";
 import Helmet from "../components/Helmet";
 import Spinner from "../components/Spinner";
-import {notify} from "../components/Toast";
-import {apiAxios} from "../utilities/axios";
+import { notify } from "../components/Toast";
+import { apiAxios } from "../utilities/axios";
 import {
   ADD_COMMENT,
   ADD_LIKE_ARTICLE,
@@ -30,12 +30,12 @@ export default function DetailsArticle() {
   const [allLike, setAllLike] = useState([]);
   const [allUnlike, setAllUnlike] = useState([]);
 
-  const {auth} = useSelector(state => state);
+  const { auth } = useSelector((state) => state);
   const anonymous = localStorage.getItem("anonymous")
     ? JSON.parse(localStorage.getItem("anonymous"))
     : null;
 
-  const handleChangeComment = e => {
+  const handleChangeComment = (e) => {
     setComment(e.target.value);
   };
 
@@ -66,8 +66,8 @@ export default function DetailsArticle() {
   };
 
   const deleteComment = (articleId, commentId) => {
-    Socket.emit(DELETE_COMMENT, {articleId, commentId});
-    setAllComments(allComments.filter(comment => comment._id !== commentId));
+    Socket.emit(DELETE_COMMENT, { articleId, commentId });
+    setAllComments(allComments.filter((comment) => comment._id !== commentId));
   };
 
   const handleToggleLike = (type, articleId) => {
@@ -79,13 +79,13 @@ export default function DetailsArticle() {
         username: anonymous.username,
       });
 
-      setAllLike([{_id: v4(), userId: anonymous._id}, ...allLike]);
+      setAllLike([{ _id: v4(), userId: anonymous._id }, ...allLike]);
     } else {
       Socket.emit(CANCEL_LIKE_ARTICLE, {
         articleId,
         userId: anonymous._id,
       });
-      setAllLike(allLike.filter(like => like.userId !== anonymous._id));
+      setAllLike(allLike.filter((like) => like.userId !== anonymous._id));
     }
   };
 
@@ -97,13 +97,13 @@ export default function DetailsArticle() {
         userId: anonymous._id,
         username: anonymous.username,
       });
-      setAllUnlike([{_id: v4(), userId: anonymous._id}, ...allUnlike]);
+      setAllUnlike([{ _id: v4(), userId: anonymous._id }, ...allUnlike]);
     } else {
       Socket.emit(CANCEL_UNLIKE_ARTICLE, {
         articleId,
         userId: anonymous._id,
       });
-      setAllUnlike(allLike.filter(like => like.userId !== anonymous._id));
+      setAllUnlike(allLike.filter((like) => like.userId !== anonymous._id));
     }
   };
 
@@ -130,7 +130,7 @@ export default function DetailsArticle() {
             articleId: params.articleId,
           },
         })
-        .then(({data}) => {
+        .then(({ data }) => {
           setLoading(false);
           setArticle(data.message);
           setError(false);
@@ -160,7 +160,7 @@ export default function DetailsArticle() {
               <div className="box-image">
                 <img
                   src={
-                    process.env.REACT_APP_API +
+                    process.env.REACT_APP_IMAGE_URL_DEV +
                     "/v1/image/" +
                     article.imageArticle
                   }
@@ -181,20 +181,20 @@ export default function DetailsArticle() {
                 </div>
                 <div
                   className="box-content col-12 mt-3"
-                  dangerouslySetInnerHTML={{__html: article.content}}
+                  dangerouslySetInnerHTML={{ __html: article.content }}
                 ></div>
 
                 <div className="box-create-comment col-12  my-3 d-flex flex-column align-items-center">
                   <div className="d-flex justify-content-center align-items-baseline">
                     <button
                       className={
-                        allLike.some(like => like.userId === anonymous._id)
+                        allLike.some((like) => like.userId === anonymous._id)
                           ? "btn-like btn-like-active btn"
                           : "btn-like btn"
                       }
                       onClick={() =>
                         handleToggleLike(
-                          allLike.some(like => like.userId === anonymous._id),
+                          allLike.some((like) => like.userId === anonymous._id),
                           article._id
                         )
                       }
@@ -203,13 +203,15 @@ export default function DetailsArticle() {
                     </button>
                     <button
                       className={
-                        allUnlike.some(like => like.userId === anonymous._id)
+                        allUnlike.some((like) => like.userId === anonymous._id)
                           ? "btn-like btn-like-active btn"
                           : "btn-like btn"
                       }
                       onClick={() =>
                         handleToggleUnlike(
-                          allUnlike.some(like => like.userId === anonymous._id),
+                          allUnlike.some(
+                            (like) => like.userId === anonymous._id
+                          ),
                           article._id
                         )
                       }
@@ -230,7 +232,7 @@ export default function DetailsArticle() {
                     placeholder="comment..."
                     value={comment}
                     onChange={handleChangeComment}
-                    onKeyUp={e => addComment(e, article)}
+                    onKeyUp={(e) => addComment(e, article)}
                   />
                 </div>
 

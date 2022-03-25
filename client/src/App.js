@@ -1,10 +1,11 @@
-import { lazy, Suspense } from "react";
-import { useSelector } from "react-redux";
+import { lazy, Suspense, useEffect, useMemo } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { io } from "socket.io-client";
 import Bar from "./components/Bar";
 import Spinner from "./components/Spinner";
 import Toaster from "./components/Toast";
+import { FETCH_WISHLIST } from "./redux/types";
 import DetailsArticle from "./screens/DetailsArticle";
 import ForgetPassword from "./screens/ForgetPassword";
 import Login from "./screens/login";
@@ -27,22 +28,26 @@ export const Socket = io(process.env.REACT_APP_API, {
 export default function App() {
   const { auth } = useSelector((state) => state);
 
+  // memoize the all washlist from localstorage and use it with dispacth
+  const arrOfWishList = useMemo(() => {
+    const getWishlist = localStorage.getItem("wishlist_articles");
+    const arr = JSON.parse(getWishlist);
+    return arr;
+  }, []);
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    // get all wishlist from locat storage and siaptch it to store
+    dispatch({ type: FETCH_WISHLIST, payload: arrOfWishList });
+  }, [arrOfWishList, dispatch]);
+
   return (
     <div className="App">
       <BrowserRouter>
         <Bar />
         <Toaster />
         <Switch>
-          <Route path="/chat">
-            <Suspense fallback={<Spinner />}>
-              <div>coming soon...</div>
-            </Suspense>
-          </Route>
-          <Route path="/notification">
-            <Suspense fallback={<Spinner />}>
-              <div>coming soon...</div>
-            </Suspense>
-          </Route>
           <Route path="/tags/:oneTag">
             <Suspense fallback={<Spinner />}>
               <OneTag />
