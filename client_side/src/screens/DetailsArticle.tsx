@@ -12,7 +12,7 @@ import Spinner from "../components/Spinner";
 import { notify } from "../components/Toast";
 import { apiAxios } from "../utilities/axios";
 import { AuthShape } from "../utilities/interfaces";
-import * as ScoketType from "../utilities/socket-events.json";
+import ScoketType from "../utilities/socket-events.json";
 let {
   ADD_COMMENT,
   ADD_LIKE_ARTICLE,
